@@ -4,7 +4,9 @@ A white-paper toolkit for writing Chinese adult (H) fiction with AI agents.
 
 **不预设任何玩法、笔触、题材或字数。每个用户打开都是一张白纸，一切偏好由勘察确定。**
 
-本仓库是一套**方法论 + 本地工具**：交给 AI 代理（Claude Code）用来写、扩写、重写中文 H 小说，同时内置本地语料库学习与用户会话记忆。所有参考文件均为**脱敏后的通用模板**，公开内容不含任何真实角色名、本地路径或用户身份。
+本仓库是一套**方法论 + 本地工具**：交给 AI 代理（Claude Code / Hermes Agent）用来写、扩写、重写中文 H 小说，同时内置本地语料库学习与用户会话记忆。所有参考文件均为**脱敏后的通用模板**，公开内容不含任何真实角色名、本地路径或用户身份。
+
+**最新增强（fork 版）**：新增可选 `references/system-panel-integration.md`，为偏好系统流/属性追踪的用户提供标准女奴面板与调教阶段规则，与主奴调教技法深度联动。
 
 ## 核心原则
 
@@ -14,7 +16,7 @@ A white-paper toolkit for writing Chinese adult (H) fiction with AI agents.
 | **隐私（P0）** | `sessions/` 用户胶囊绝不离开本机。所有公开内容均脱敏。 |
 | **身体反应优先** | 用身体反应代替叙述：发烫 / 战栗 / 湿透 / 腿软 / 收缩 / 喷水。 |
 | **高潮写足** | 痉挛 → 弓起 → 脚尖绷直 → 收缩 → 喷涌 → 眼前发白 → 脱力，不能一句带过。 |
-| **声音 + 液体成对** | 啧啧/咕叽 与 汩汩/顺着淌 必须同时出现，无"干动作"。 |
+| **声音 + 液体成对** | 嘟嘟/咕咙 与 沓沓/顺着淌 必须同时出现，无"干动作"。 |
 | **多维描写** | 每个器官至少覆盖 3-4 个维度（形状 / 触感 / 声音 / 视觉 / 状态）。 |
 
 ## 三层架构
@@ -31,6 +33,7 @@ A white-paper toolkit for writing Chinese adult (H) fiction with AI agents.
 - **学习本地书库**：索引你自己的 `.txt` 书库，提取玩法模式与技法密度，转成脱敏的风格约束。
 - **会话记忆**：每次交互追加反馈日志，风格指纹逐步收敛到该用户口味，越用越准。
 - **本地 CLI 工具**：纯本地操作，零 API 依赖。
+- **系统面板集成（可选）**：针对调教/系统流用户，提供标准属性面板与阶段追踪。
 
 ## 安装
 
@@ -64,11 +67,11 @@ novel stats
 PYTHONPATH="$仓库目录" python -m harness.cli --help
 ```
 
-## 在 Claude Code 中使用
+## 在 Claude Code / Hermes 中使用
 
-技能本体定义在 `SKILL.md`（Claude Code skill 格式）：
+技能本体定义在 `SKILL.md`：
 
-1. 将本仓库（或 `SKILL.md` + `references/`）放入你的 skills 目录 / 让 Claude Code 指向本仓库。
+1. 将本仓库（或 `SKILL.md` + `references/`）放入你的 skills 目录 / 让 Agent 指向本仓库。
 2. 提出写 / 扩写 / 重写中文 H 小说的请求。
 3. 技能会**先勘察**（性别/笔触、玩法取向、题材形式、单章字数、禁忌清单），把结果写入 `sessions/` 胶囊，再动笔。
 
@@ -86,6 +89,7 @@ references/           脱敏技法/玩法模板
   tech-toy-play-techniques.md        情趣玩具 / 远程控制
   domination-training-techniques.md  调教 / 主奴（权力交换）
   group-play-techniques.md           多人 / 群交空间调度
+  system-panel-integration.md        系统面板与属性追踪（可选，调教流）
 harness/              本地 Python 工具（cli / index / calibrate / prompts）
 scripts/              辅助脚本（wordcount / batch_insert）
 sessions/             用户胶囊 —— gitignore，仅本地
